@@ -1,0 +1,196 @@
+﻿@model PagedList.IPagedList<BusinessDomain.CustomersWithOrders>
+@using PagedList.Mvc;
+
+<style>
+    table {
+        width: 100%;
+    }
+
+        table tr td {
+            border: 2px solid black;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        table tr:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        table tr th {
+            border: 2px solid black;
+            text-align: center;
+            background-color: #fff;
+            color: #000;
+        }
+</style>
+
+@{
+    ViewBag.Title = "PremierCustomersOrdersDetail";
+}
+
+<h2>Customer Orders Detail</h2>
+
+
+@Html.ActionLink("Change Shiping Address", "ChangeShipingAddress",
+new { CustomerID = Model.First().CustomerID, SalesOrderID = Model.First().SalesOrderID }, new { @class = "btn btn-default" })
+
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                EmailAddress
+            </th>
+            <th>
+                PhoneNumber
+            </th>
+            <th>
+                Address
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().FullAddress)
+            </td>
+        </tr>
+    </table>
+
+    <br />
+
+    <table>
+        <tr>
+            <th>
+                Sales Order ID
+            </th>
+            <th>
+                Order Date
+            </th>
+            <th>
+                Ship Date
+            </th>
+            <th>
+                Account Number
+            </th>
+            <th>
+                Sub Total
+            </th>
+            <th>
+                Tax Amt
+            </th>
+            <th>
+                Freight
+            </th>
+            <th>
+                Total Due
+            </th>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().SalesOrderID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().ShipDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().SubTotal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().TaxAmt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().Freight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().TotalDue)
+            </td>
+        </tr>
+    </table>
+
+    <br />
+
+    
+        @Html.ActionLink("Add Item to Order", "AddIteamToOrder",
+        new {CustomerID = Model.First().CustomerID, SalesOrderID = Model.First().SalesOrderID }, new { @class = "btn btn-default" })
+    <br />
+
+    <table>
+        <tr>
+            <th>
+                @Html.Label("Operation")
+            </th>
+            
+            <th>
+                @Html.ActionLink("ProductName", "PremierCustomersOrdersDetail",
+                new { sortOrder = "ProductName", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID, SalesOrderID = Model.First().SalesOrderID })
+            </th>
+            <th>
+                @Html.ActionLink("OrderQty", "PremierCustomersOrdersDetail",
+                new { sortOrder = "OrderQty", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID, SalesOrderID = Model.First().SalesOrderID })
+            </th>
+            <th>
+                @Html.ActionLink("UnitPrice", "PremierCustomersOrdersDetail",
+                new { sortOrder = "UnitPrice", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID, SalesOrderID = Model.First().SalesOrderID })
+            </th>
+            <th>
+                @Html.ActionLink("Carrier Tracking Number", "PremierCustomersOrdersDetail",
+                new { sortOrder = "CarrierTrackingNumber", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID, SalesOrderID = Model.First().SalesOrderID })
+            </th>
+            
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Modify", "ModifyItemFromOrder", new { CustomerID = item.CustomerID, SalesOrderID = item.SalesOrderID, SalesOrderDetailID=item.SalesOrderDetailID }) | 
+                    @Html.ActionLink("Delete", "DeleteItemFromOrder", new { CustomerID = item.CustomerID, SalesOrderID = item.SalesOrderID, SalesOrderDetailID = item.SalesOrderDetailID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderQty)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CarrierTrackingNumber)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <br />
+    <div id='Paging' style="text-align:center">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("PremierCustomersOrders", new { CustomerID = Model.First().CustomerID, page = page }))
+    </div>
+}

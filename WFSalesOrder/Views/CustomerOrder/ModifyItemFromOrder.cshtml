@@ -1,0 +1,79 @@
+﻿@model DataAccessLayer.SalesOrderDetail
+
+@{
+    ViewBag.Title = "EditItemFromOrder";
+}
+
+<h2>Edit Item FromOrder</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+
+    <hr />
+   @using (Html.BeginForm("UpdateItemInDB", "CustomerOrder", new { pCustomerID = @ViewBag.CustomerID, pSalesOrderID = @ViewBag.SalesOrderID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label>Sales OrderDetail ID:</label>
+                @Html.TextBoxFor(model => model.SalesOrderDetailID, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Carrier Tracking Number:</label>
+                @Html.TextBoxFor(model => model.CarrierTrackingNumber, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Order Qty:</label>
+                @Html.TextBoxFor(model => model.OrderQty, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Product ID:</label>
+                @Html.TextBoxFor(model => model.ProductID, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Unit Price:</label>
+                @Html.TextBoxFor(model => model.UnitPrice, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Line Total:</label>
+                @Html.TextBoxFor(model => model.LineTotal, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Edit" class="btn btn-default" onclick="return validatePage()" /> 
+        </div>
+    }
+</div>
+
+<div id="OnMessageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Messages</h4>
+            </div>
+            <div class="modal-body">
+              
+                <p>Carrier Tracking Number is required.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function validatePage()
+    {
+        var CarrierTrackingNumber = $("#CarrierTrackingNumber").val();
+        if (CarrierTrackingNumber=="")
+        {
+            $('#OnMessageModal').modal('show');
+            return false;
+        }
+        return true;
+    }
+</script>

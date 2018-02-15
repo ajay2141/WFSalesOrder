@@ -1,0 +1,47 @@
+﻿@model DataAccessLayer.SalesOrderDetail
+
+@{
+    ViewBag.Title = "DeleteItemFromOrder";
+}
+
+<h2>Delete Item FromOrder</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    @using (Html.BeginForm("DeleteItemInDB", "CustomerOrder", new { pCustomerID = @ViewBag.CustomerID, pSalesOrderID = @ViewBag.SalesOrderID }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="form-group">
+                <label>Sales OrderDetail ID:</label>
+                @Html.TextBoxFor(model => model.SalesOrderDetailID, new { @readonly = "readonly" , @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Carrier Tracking Number:</label>
+                @Html.TextBoxFor(model => model.CarrierTrackingNumber, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Order Qty:</label>
+                @Html.TextBoxFor(model => model.OrderQty, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Product ID:</label>
+                @Html.TextBoxFor(model => model.ProductID, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Unit Price:</label>
+                @Html.TextBoxFor(model => model.UnitPrice, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label>Line Total:</label>
+                @Html.TextBoxFor(model => model.LineTotal, new { @readonly = "readonly", @class = "form-control" })
+            </div>
+
+        </div>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> 
+        </div>
+    }
+</div>

@@ -1,0 +1,159 @@
+﻿@model PagedList.IPagedList<BusinessDomain.CustomersWithOrders>
+@using PagedList.Mvc;
+
+<style>
+    table {
+        width: 100%;
+    }
+
+        table tr td {
+            border: 2px solid black;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        table tr:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        table tr th {
+            border: 2px solid black;
+            text-align: center;
+            background-color: #fff;
+            color: #000;
+        }
+</style>
+
+@{
+    ViewBag.Title = "PremierCustomersOrders";
+}
+
+<h2>Customer Orders</h2>
+
+@using (Html.BeginForm())
+{
+    <br />
+    <table>
+        <tr>
+            <th>
+                FirstName
+            </th>
+            <th>
+                LastName
+            </th>
+            <th>
+                EmailAddress
+            </th>
+            <th>
+                PhoneNumber
+            </th>
+            <th>
+                Address
+            </th>
+
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => Model.First().FullAddress )
+            </td>
+        </tr>
+    </table>
+
+    <br />
+
+    <table>
+        <tr>
+            <th>
+                @Html.Label("Operation")
+            </th>
+
+            <th>
+                @Html.ActionLink("Sales Order ID", "PremierCustomersOrders",
+                new { sortOrder = "SalesOrderID", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("Order Date", "PremierCustomersOrders",
+                new { sortOrder = "OrderDate", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("Ship Date", "PremierCustomersOrders",
+                new { sortOrder = "ShipDate", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("Account Number", "PremierCustomersOrders",
+                new { sortOrder = "AccountNumber", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("Sub Total", "DisplayPremierCustomers",
+                new { sortOrder = "SubTotal", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("Tax Amt", "PremierCustomersOrders",
+                new { sortOrder = "TaxAmt", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("Freight", "PremierCustomersOrders",
+                new { sortOrder = "Freight", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+            <th>
+                @Html.ActionLink("TotalDue", "PremierCustomersOrders",
+                new { sortOrder = "TaxAmt", CurrentSort = ViewBag.CurrentSort, CustomerID = Model.First().CustomerID })
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Details", "PremierCustomersOrdersDetail", new { CustomerID = item.CustomerID, SalesOrderID = item.SalesOrderID })
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesOrderID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ShipDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AccountNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SubTotal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TaxAmt)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Freight)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalDue)
+                </td>
+            </tr>
+        }
+    </table>
+
+    <br />
+    <div id='Paging' style="text-align:center">
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+        of @Model.PageCount
+
+        @Html.PagedListPager(Model, page => Url.Action("PremierCustomersOrders", new { CustomerID = Model.First().CustomerID, page = page }))
+    </div>
+}
+

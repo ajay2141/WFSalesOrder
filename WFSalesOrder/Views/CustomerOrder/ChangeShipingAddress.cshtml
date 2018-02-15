@@ -1,0 +1,86 @@
+﻿@model List<BusinessDomain.CustomerAddress>
+@using PagedList.Mvc;
+
+<style>
+    table {
+        width: 100%;
+    }
+
+        table tr td {
+            border: 2px solid black;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        table tr:hover {
+            background-color: #000;
+            color: #fff;
+        }
+
+        table tr th {
+            border: 2px solid black;
+            text-align: center;
+            background-color: #fff;
+            color: #000;
+        }
+</style>
+
+@{
+    ViewBag.Title = "PremierCustomersOrdersDetail";
+}
+
+@{
+    ViewBag.Title = "Change Shiping Address";
+}
+
+<h2>Change Shiping Address</h2>
+
+@using (Html.BeginForm())
+{
+    <table>
+        <tr>
+            <th>
+                Select This Address
+            </th>
+            <th>
+                Address Line1
+            </th>
+            <th>
+                Address Line2
+            </th>
+            <th>
+                City
+            </th>
+            <th>
+                State
+            </th>
+            <th>
+                Postal Code
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Select", "UpdateBillToAddress", new { CustomerID = ViewBag.CustomerID, SalesOrderID = ViewBag.SalesOrderID, AddressID=item.AddressID })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressLine1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AddressLine2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.City)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StateProvinceID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalCode)
+                </td>
+            </tr>
+        }
+    </table>
+}

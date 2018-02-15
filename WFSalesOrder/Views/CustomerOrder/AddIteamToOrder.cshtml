@@ -1,0 +1,102 @@
+﻿@model DataAccessLayer.SalesOrderDetail
+@{
+    ViewBag.Title = "AddIteamToOrder";
+}
+
+<h2>Add Item To Order</h2>
+@ViewBag.CustomerID
+@ViewBag.SalesOrderID
+
+@using (Html.BeginForm("SaveNewItemToOrder", "CustomerOrder", new { CustomerID = @ViewBag.CustomerID, SalesOrderID = @ViewBag.SalesOrderID },FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            <label for="usr">Product:</label>
+            @Html.DropDownList("ProductList", new SelectList(ViewBag.ProductList, "ProductID", "Name"), "Select", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Carrier Tracking Number:</label>
+            @Html.TextBoxFor(model => model.CarrierTrackingNumber, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Order Qty:</label>
+            @Html.TextBoxFor(model => model.OrderQty, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Product ID:</label>
+            @Html.TextBoxFor(model => model.ProductID, new { @readonly = "readonly", @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Unit Price:</label>
+            @Html.TextBoxFor(model => model.UnitPrice, new { @readonly = "readonly", @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Line Total:</label>
+            @Html.TextBoxFor(model => model.LineTotal, new { @readonly = "readonly", @class = "form-control" })
+        </div>
+      
+        <div class="form-group">
+            <label for="usr">Unit Prize Discount:</label>
+            <label for="usr">10%</label>
+        </div>
+      
+    </div>
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Add New Item" class="btn btn-default" onclick="return validatePage()" />
+    </div>
+}
+
+
+<div id="OnMessageModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Messages</h4>
+            </div>
+            <div class="modal-body">
+                <div style="color:red" id="Messagtext"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function validatePage()
+    {
+        debugger;
+        var CarrierTrackingNumber = $("#CarrierTrackingNumber").val();
+        var OrderQty = $("#OrderQty").val();
+        var ProductList = $("#ProductList").val();
+        var Messages="";
+       
+        if (ProductList == "")
+            Messages += "Please select Product.<br/>";
+        if (CarrierTrackingNumber == "")
+            Messages += "Carrier Tracking Number is required.<br/>";
+        if (OrderQty == "")
+            Messages += "Order Qty is required.<br/>";
+
+        if (Messages != "") {
+            $("#Messagtext").html(Messages);
+            $('#OnMessageModal').modal('show');
+            return false;
+        }
+        return true;
+    }
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

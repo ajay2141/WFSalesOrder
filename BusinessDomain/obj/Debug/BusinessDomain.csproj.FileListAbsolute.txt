@@ -1,0 +1,5 @@
+D:\RnD\WFProject\WFSalesOrder\BusinessDomain\bin\Debug\BusinessDomain.dll
+D:\RnD\WFProject\WFSalesOrder\BusinessDomain\bin\Debug\BusinessDomain.pdb
+D:\RnD\WFProject\WFSalesOrder\BusinessDomain\obj\Debug\BusinessDomain.csprojResolveAssemblyReference.cache
+D:\RnD\WFProject\WFSalesOrder\BusinessDomain\obj\Debug\BusinessDomain.dll
+D:\RnD\WFProject\WFSalesOrder\BusinessDomain\obj\Debug\BusinessDomain.pdb

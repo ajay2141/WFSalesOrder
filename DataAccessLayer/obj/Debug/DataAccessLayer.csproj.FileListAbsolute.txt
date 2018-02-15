@@ -1,0 +1,16 @@
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\DataAccessLayer.dll.config
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\DataAccessLayer.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\DataAccessLayer.pdb
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\EntityFramework.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\EntityFramework.xml
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\EntityFramework.SqlServer.xml
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\obj\Debug\DataAccessLayer.csprojResolveAssemblyReference.cache
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\obj\Debug\DataAccessLayer.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\obj\Debug\DataAccessLayer.pdb
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\BusinessDomain.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\BusinessDomain.pdb
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\PagedList.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\PagedList.Mvc.dll
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\PagedList.xml
+D:\RnD\WFProject\WFSalesOrder\DataAccessLayer\bin\Debug\PagedList.Mvc.xml
